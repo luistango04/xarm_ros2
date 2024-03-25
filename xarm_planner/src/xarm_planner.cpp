@@ -49,10 +49,28 @@ bool XArmPlanner::planJointTarget(const std::vector<double>& joint_target)
     is_trajectory_ = false;
     return success;
 }
+std::string poseToString(const geometry_msgs::msg::Pose& pose);
+
+
+// Convert the geometry_msgs::msg::Pose to a string
+std::string poseToString(const geometry_msgs::msg::Pose& pose) {
+    std::ostringstream oss;
+    oss << "Position: (" << pose.position.x << ", " << pose.position.y << ", " << pose.position.z << ") ";
+    oss << "Orientation: (" << pose.orientation.x << ", " << pose.orientation.y << ", " << pose.orientation.z << ", " << pose.orientation.w << ")";
+    return oss.str();
+}
+
 
 bool XArmPlanner::planPoseTarget(const geometry_msgs::msg::Pose& pose_target)
 {
+    RCLCPP_WARN(rclcpp::get_logger("my_logger"), "Contents of pose_target: %s", poseToString(pose_target).c_str());
+    move_group_->setGoalPositionTolerance(.1);
+    move_group_->setGoalTolerance(0.1);
+    
+    move_group_->setNumPlanningAttempts(300);
+    
     bool success = move_group_->setPoseTarget(pose_target);
+    //bool success = move_group_->setJointValueTarget(pose_target,true);
     if (!success)
         RCLCPP_WARN(node_->get_logger(), "setPoseTarget: out of bounds");
     success = (move_group_->plan(xarm_plan_) == moveit::core::MoveItErrorCode::SUCCESS);

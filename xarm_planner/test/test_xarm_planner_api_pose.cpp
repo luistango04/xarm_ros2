@@ -36,40 +36,41 @@ int main(int argc, char** argv)
     xarm_planner::XArmPlanner planner(node, group_name);
 
     geometry_msgs::msg::Pose target_pose1;
-    target_pose1.position.x = 0.3;
-	target_pose1.position.y = -0.1;
-	target_pose1.position.z = 0.2;
-	target_pose1.orientation.x = 1;
-	target_pose1.orientation.y = 0;
+    target_pose1.position.x = 0.7;
+	target_pose1.position.y = 0;
+	target_pose1.position.z = 0.7;
+	target_pose1.orientation.x = 0;
+	target_pose1.orientation.y = 0.7071068;
 	target_pose1.orientation.z = 0;
-	target_pose1.orientation.w = 0;
+	target_pose1.orientation.w = 0.7071068;
 
     geometry_msgs::msg::Pose target_pose2;
-    target_pose2.position.x = 0.3;
-	target_pose2.position.y = 0.1;
-	target_pose2.position.z = 0.2;
-	target_pose2.orientation.x = 1;
-	target_pose2.orientation.y = 0;
+    target_pose2.position.x = 0.7;
+	target_pose2.position.y = 0.0;
+	target_pose2.position.z = 0.65;
+	target_pose2.orientation.x = 0;
+	target_pose2.orientation.y = 0.7071068;
 	target_pose2.orientation.z = 0;
-	target_pose2.orientation.w = 0;
+	target_pose2.orientation.w = 0.7071068;
 
     geometry_msgs::msg::Pose target_pose3;
-    target_pose3.position.x = 0.3;
-	target_pose3.position.y = 0.1;
-	target_pose3.position.z = 0.4;
-	target_pose3.orientation.x = 1;
-	target_pose3.orientation.y = 0;
+    target_pose3.position.x = 0.75;
+	target_pose3.position.y = 0.0;
+	target_pose3.position.z = 0.65;
+	target_pose3.orientation.x = 0;
+	target_pose3.orientation.y = 0.7071068;
 	target_pose3.orientation.z = 0;
-	target_pose3.orientation.w = 0;
+	target_pose3.orientation.w = 0.7071068;
 
     geometry_msgs::msg::Pose target_pose4;
-    target_pose4.position.x = 0.3;
-	target_pose4.position.y = -0.1;
-	target_pose4.position.z = 0.4;
-	target_pose4.orientation.x = 1;
-	target_pose4.orientation.y = 0;
+    target_pose4.position.x = 0.75;
+	target_pose4.position.y = 0.0;
+	target_pose4.position.z = 0.7;
+	target_pose4.orientation.x = 0;
+	target_pose4.orientation.y = 0.7071068;
 	target_pose4.orientation.z = 0;
-	target_pose4.orientation.w = 0;
+	target_pose4.orientation.w = 0.7071068;
+    
 
     while (rclcpp::ok())
     {

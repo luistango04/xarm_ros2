@@ -272,7 +272,14 @@ def launch_setup(context, *args, **kwargs):
         arguments=args,
         parameters=[{'use_sim_time': use_sim_time}],
     )
-
+    static_tf_camera = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='static_transform_publisher_camera',
+        output='screen',
+        arguments=['0.1', '0.0', '-0.05', '0.0', '-0.5236', '0.0', 'world', 'camera_depth_frame'],
+        parameters=[{'use_sim_time': use_sim_time}],
+    )
     return [
         RegisterEventHandler(event_handler=OnProcessExit(
             target_action=rviz2_node,
@@ -280,6 +287,7 @@ def launch_setup(context, *args, **kwargs):
         )),
         rviz2_node,
         static_tf,
+        static_tf_camera,
         move_group_node,
     ]
 

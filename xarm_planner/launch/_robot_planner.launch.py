@@ -17,6 +17,13 @@ from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
+joint_limits_yaml_path = None
+
+def print_joint_limits_yaml_path(context):
+    global joint_limits_yaml_path
+    print("Directory for joint limits configuration file:", joint_limits_yaml_path)
+
+
 
 def launch_setup(context, *args, **kwargs):
     dof = LaunchConfiguration('dof')
@@ -108,8 +115,10 @@ def launch_setup(context, *args, **kwargs):
             'xarm_type': xarm_type,
         }
     )
+    global joint_limits_yaml_path
     kinematics_yaml = robot_description_parameters['robot_description_kinematics']
     joint_limits_yaml = robot_description_parameters.get('robot_description_planning', None)
+    # joint_limits_yaml_path = os.path.dirname(joint_limits_yaml) if joint_limits_yaml else None
     add_prefix_to_moveit_params = getattr(mod, 'add_prefix_to_moveit_params')
     add_prefix_to_moveit_params(kinematics_yaml=kinematics_yaml, joint_limits_yaml=joint_limits_yaml, prefix=prefix.perform(context))
     try:
@@ -152,5 +161,7 @@ def launch_setup(context, *args, **kwargs):
 
 def generate_launch_description():
     return LaunchDescription([
-        OpaqueFunction(function=launch_setup)
+        OpaqueFunction(function=launch_setup),
+        # OpaqueFunction(function=print_joint_limits_yaml_path)
+        
     ])

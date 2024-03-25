@@ -92,6 +92,17 @@ target_link_libraries(test_xarm_planner_api_pose
   ${ament_LIBRARIES}
 )
 
+add_executable(movebot test/movebot.cpp)
+ament_target_dependencies(movebot
+  ${dependencies}
+)
+target_link_libraries(movebot 
+  xarm_planner
+  ${ament_LIBRARIES}
+)
+
+
+
 add_executable(test_xarm_gripper_planner_api_joint test/test_xarm_gripper_planner_api_joint.cpp)
 ament_target_dependencies(test_xarm_gripper_planner_api_joint
   ${dependencies}
@@ -145,6 +156,7 @@ install(
   test_xarm_planner_api_joint
   test_dual_xarm_planner_api_joint
   test_xarm_planner_api_pose
+  movebot
   test_xarm_gripper_planner_api_joint
   test_xarm_planner_client_joint
   test_xarm_planner_client_pose
